@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let buttonStart = document.createElement('button');
     buttonStart.innerText = 'Start the draw';
-    buttonStart.classList.add('btn', 'btn-primary', 'btn-lg');
+    buttonStart.classList.add('btn', 'btn-primary', 'btn-lg', 'd-flex', 'justify-content-between');
     buttonStart.style.setProperty('role', 'button');
     buttonStart.addEventListener('click', () => {
         // let content = document.querySelector('.results');
@@ -16,8 +16,8 @@ document.addEventListener('DOMContentLoaded', () => {
         beginDraw();
     })
     let header = document.querySelector('.header');
-    header.style.setProperty('background', 'url("gifts.jpg") ');
-    header.style.setProperty('background-size', 'cover');
+    header.style.background = 'url("gifts.jpg")';
+    header.classList.add('d-flex', 'justify-content-center');
     header.appendChild(buttonStart);
     
     let beginDraw = () => {     
@@ -48,35 +48,32 @@ document.addEventListener('DOMContentLoaded', () => {
     showResults = (drawResultArr) => {
         let content = document.querySelector('.results');
         let resultTable = document.createElement('ul');
-        resultTable.classList.add('list-group');
-        resultTable.classList.add('result-table');
-
-        
+        resultTable.classList.add('list-group', 'result-table', 'tab-content');
 
         for (let j of drawResultArr) {
             let userResult = j;
             let userResultSplit = userResult.toString().split(':');
-            let resultItem = document.createElement('li', 'flex-fill');
-            resultItem.classList.add('list-group-item', 'd-flex');
+            let resultItem = document.createElement('li');
+            resultItem.classList.add('list-group-item', 'd-flex', 'flex-fill','justify-content-between', 'order-1');
             resultItem.innerHTML = `<span class='user'> ${userResultSplit[0]} </span>`;
             
             let button = document.createElement('button'); 
             button.innerText = 'Show / hide';
-            button.classList.add('btn', 'btn-success','btn-md', 'd-flex','justify-content-end');
+            button.classList.add('btn', 'btn-success','btn-sm', 'd-flex', 'order-3');
             button.dataset.dataToggle = button;
             resultItem.appendChild(button);
             resultTable.appendChild(resultItem);
 
             let resultItemUserDraw = document.createElement('span');
-            resultItemUserDraw.classList.add('user-draw');
-            resultItemUserDraw.style.setProperty('visibility', 'hidden');
+            resultItemUserDraw.classList.add('user-draw', 'd-flex', 'order-2');
+            resultItemUserDraw.style.visibility = 'hidden';
             resultItemUserDraw.innerHTML =  `${userResultSplit[1]}`;
             button.addEventListener('click', () => {        
                 if (resultItemUserDraw.style.visibility === 'hidden') {
                     resultItem.appendChild(resultItemUserDraw);
-                    resultItemUserDraw.style.setProperty('visibility', 'visible');
+                    resultItemUserDraw.style.visibility = 'visible';
                 } else {
-                    resultItemUserDraw.style.setProperty('visibility', 'hidden');
+                    resultItemUserDraw.style.visibility = 'hidden';
                 }
             });
              
